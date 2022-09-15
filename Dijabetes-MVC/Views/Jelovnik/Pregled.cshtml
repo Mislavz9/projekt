@@ -1,0 +1,50 @@
+﻿@model Dijabetes_MVC.ViewModels.JelovnikVM
+
+@{
+    ViewBag.Title = "Pregled";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row" style="text-align:center">
+        <h1>SITAMET FITNESS</h1>
+        <img src="~/Resources/images/fit.png" alt="img" class="fitness-img" />
+        <hr style="width:100%;border-color:black;" />
+
+        <table class="table table-bordered table-responsive table-hover">
+            <tr style="text-align:center">
+                <th>Tip obroka</th>
+                <th>Obrok</th>
+                @foreach (var mjerna in Model.mjerneJedinice)
+                {
+                    <th>@mjerna.Naziv</th>
+                }
+            </tr>
+            @foreach (var obrok in Model.jelovnik_Obroci)
+            {
+                <tr>
+                    <td>@obrok.Obrok.TipObroka.Naziv</td>
+                    <td>
+                        <span style="font-weight:bold">Protein:</span> @Model.namirnice.Where(n => n.TipNamirniceID == 1).FirstOrDefault().Naziv <br />
+                        <span style="font-weight:bold">Ugljikohidrat:</span> @Model.namirnice.Where(n => n.TipNamirniceID == 2).FirstOrDefault() <br />
+                        <span style="font-weight:bold">Mast:</span> @Model.namirnice.Where(n => n.TipNamirniceID == 3).FirstOrDefault().Naziv
+                    </td>
+                    @foreach (var mjerna in Model.mjerneJedinice)
+                    {
+                        <td>5</td>
+                    }
+                </tr>
+            }
+        </table>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="submit" value="Prihvati" class="btn btn-warning" />
+            </div>
+        </div>
+    </div>
+    <div>
+        @Html.ActionLink("Povratak", "Index", "Jelovnik")
+    </div>
+}

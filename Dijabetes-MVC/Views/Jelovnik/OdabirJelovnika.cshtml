@@ -1,0 +1,46 @@
+﻿@model List<Dijabetes_MVC.Models.Jelovnik>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row" style="text-align:center">
+        <h1>SITAMET FITNESS</h1>
+        <img src="~/Resources/images/fit.png" alt="img" class="fitness-img" />
+        <hr style="width:100%;border-color:black;" />
+        <p>Izbor jelovnika</p>
+
+        <table class="table table-bordered table-responsive table-hover">
+            <tr>
+            </tr>
+            @foreach (var d in Model)
+            {
+                <tr>
+                    <th>Broj obroka</th>
+                    <th>Naziv</th>
+                    <th>Vrijedi do</th>
+                </tr>
+                <tr>
+                    <td>@d.BrojObroka</td>
+                    <td>@d.Naziv</td>
+                    <td>@d.VrijediDO</td>
+                </tr>
+
+            }
+        </table>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                @foreach (var d in Model)
+                {@Html.ActionLink("Odaberi", "Pregled", new { id = d.ID })}
+            </div>
+        </div>
+    </div>
+    <div>
+        @Html.ActionLink("Povratak", "Index", "Jelovnik")
+    </div>
+}
+

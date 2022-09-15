@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DijabetesBazaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+  </EntityType>
+  <EntityType Name="Jelovnik">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="varchar" MaxLength="50" />
+    <Property Name="VrijediOD" Type="datetime" />
+    <Property Name="VrijediDO" Type="datetime" />
+    <Property Name="BrojObroka" Type="int" />
+  </EntityType>
+  <EntityType Name="Jelovnik_Obrok">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ObrokID" Type="int" />
+    <Property Name="JelovnikID" Type="int" />
+  </EntityType>
+  <EntityType Name="Korisnik">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="8" Nullable="false" />
+  </EntityType>
+  <EntityType Name="KorisnikInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KorisnikID" Type="int" />
+    <Property Name="Ime" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Prezime" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Datum" Type="datetime" Nullable="false" />
+    <Property Name="Tezina" Type="int" Nullable="false" />
+    <Property Name="Visina" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="RazinaFizAktivnostiID" Type="int" />
+    <Property Name="TipDijabetesaID" Type="int" />
+    <Property Name="SpolID" Type="int" />
+  </EntityType>
+  <EntityType Name="MjernaJedinica">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MjernaJedinica_Namirnica_Kcal">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NamirnicaID" Type="int" />
+    <Property Name="MjernaJedinicaID" Type="int" />
+    <Property Name="Kcal" Type="int" />
+  </EntityType>
+  <EntityType Name="Namirnica">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="TipNamirniceID" Type="int" />
+  </EntityType>
+  <EntityType Name="Obrok">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TipObrokaID" Type="int" />
+    <Property Name="PostotciObroka" Type="int" />
+  </EntityType>
+  <EntityType Name="PostotciObroka">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Protein" Type="int" />
+    <Property Name="Ugljikohidrat" Type="int" />
+    <Property Name="Mast" Type="int" />
+    <Property Name="Ukupno" Type="int" />
+  </EntityType>
+  <EntityType Name="RazinaFizAktivnosti">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Razina" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="Spol">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="TipDijabetesa">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tip" Type="int" />
+  </EntityType>
+  <EntityType Name="TipNamirnice">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipObroka">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <Association Name="FK__Admin__UserID__276EDEB3">
+    <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="0..1" />
+    <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Korisnik">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Admin">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Jelovnik___Jelov__4AB81AF0">
+    <End Role="Jelovnik" Type="Self.Jelovnik" Multiplicity="0..1" />
+    <End Role="Jelovnik_Obrok" Type="Self.Jelovnik_Obrok" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Jelovnik">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Jelovnik_Obrok">
+        <PropertyRef Name="JelovnikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Jelovnik___Obrok__49C3F6B7">
+    <End Role="Obrok" Type="Self.Obrok" Multiplicity="0..1" />
+    <End Role="Jelovnik_Obrok" Type="Self.Jelovnik_Obrok" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Obrok">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Jelovnik_Obrok">
+        <PropertyRef Name="ObrokID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KorisnikI__Koris__300424B4">
+    <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="0..1" />
+    <End Role="KorisnikInfo" Type="Self.KorisnikInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Korisnik">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="KorisnikInfo">
+        <PropertyRef Name="KorisnikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KorisnikI__Razin__30F848ED">
+    <End Role="RazinaFizAktivnosti" Type="Self.RazinaFizAktivnosti" Multiplicity="0..1" />
+    <End Role="KorisnikInfo" Type="Self.KorisnikInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RazinaFizAktivnosti">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="KorisnikInfo">
+        <PropertyRef Name="RazinaFizAktivnostiID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KorisnikI__SpolI__32E0915F">
+    <End Role="Spol" Type="Self.Spol" Multiplicity="0..1" />
+    <End Role="KorisnikInfo" Type="Self.KorisnikInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Spol">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="KorisnikInfo">
+        <PropertyRef Name="SpolID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KorisnikI__TipDi__31EC6D26">
+    <End Role="TipDijabetesa" Type="Self.TipDijabetesa" Multiplicity="0..1" />
+    <End Role="KorisnikInfo" Type="Self.KorisnikInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipDijabetesa">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="KorisnikInfo">
+        <PropertyRef Name="TipDijabetesaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MjernaJed__Mjern__3D5E1FD2">
+    <End Role="MjernaJedinica" Type="Self.MjernaJedinica" Multiplicity="0..1" />
+    <End Role="MjernaJedinica_Namirnica_Kcal" Type="Self.MjernaJedinica_Namirnica_Kcal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MjernaJedinica">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MjernaJedinica_Namirnica_Kcal">
+        <PropertyRef Name="MjernaJedinicaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MjernaJed__Namir__3C69FB99">
+    <End Role="Namirnica" Type="Self.Namirnica" Multiplicity="0..1" />
+    <End Role="MjernaJedinica_Namirnica_Kcal" Type="Self.MjernaJedinica_Namirnica_Kcal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Namirnica">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MjernaJedinica_Namirnica_Kcal">
+        <PropertyRef Name="NamirnicaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Namirnica__TipNa__398D8EEE">
+    <End Role="TipNamirnice" Type="Self.TipNamirnice" Multiplicity="0..1" />
+    <End Role="Namirnica" Type="Self.Namirnica" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipNamirnice">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Namirnica">
+        <PropertyRef Name="TipNamirniceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Obrok__PostotciO__44FF419A">
+    <End Role="PostotciObroka" Type="Self.PostotciObroka" Multiplicity="0..1" />
+    <End Role="Obrok" Type="Self.Obrok" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PostotciObroka">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Obrok">
+        <PropertyRef Name="PostotciObroka" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Obrok__TipObroka__440B1D61">
+    <End Role="TipObroka" Type="Self.TipObroka" Multiplicity="0..1" />
+    <End Role="Obrok" Type="Self.Obrok" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipObroka">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Obrok">
+        <PropertyRef Name="TipObrokaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DijabetesBazaModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Jelovnik" EntityType="Self.Jelovnik" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Jelovnik_Obrok" EntityType="Self.Jelovnik_Obrok" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Korisnik" EntityType="Self.Korisnik" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KorisnikInfo" EntityType="Self.KorisnikInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MjernaJedinica" EntityType="Self.MjernaJedinica" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MjernaJedinica_Namirnica_Kcal" EntityType="Self.MjernaJedinica_Namirnica_Kcal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Namirnica" EntityType="Self.Namirnica" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Obrok" EntityType="Self.Obrok" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PostotciObroka" EntityType="Self.PostotciObroka" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RazinaFizAktivnosti" EntityType="Self.RazinaFizAktivnosti" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Spol" EntityType="Self.Spol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipDijabetesa" EntityType="Self.TipDijabetesa" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipNamirnice" EntityType="Self.TipNamirnice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipObroka" EntityType="Self.TipObroka" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Admin__UserID__276EDEB3" Association="Self.FK__Admin__UserID__276EDEB3">
+      <End Role="Korisnik" EntitySet="Korisnik" />
+      <End Role="Admin" EntitySet="Admin" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Jelovnik___Jelov__4AB81AF0" Association="Self.FK__Jelovnik___Jelov__4AB81AF0">
+      <End Role="Jelovnik" EntitySet="Jelovnik" />
+      <End Role="Jelovnik_Obrok" EntitySet="Jelovnik_Obrok" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Jelovnik___Obrok__49C3F6B7" Association="Self.FK__Jelovnik___Obrok__49C3F6B7">
+      <End Role="Obrok" EntitySet="Obrok" />
+      <End Role="Jelovnik_Obrok" EntitySet="Jelovnik_Obrok" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KorisnikI__Koris__300424B4" Association="Self.FK__KorisnikI__Koris__300424B4">
+      <End Role="Korisnik" EntitySet="Korisnik" />
+      <End Role="KorisnikInfo" EntitySet="KorisnikInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KorisnikI__Razin__30F848ED" Association="Self.FK__KorisnikI__Razin__30F848ED">
+      <End Role="RazinaFizAktivnosti" EntitySet="RazinaFizAktivnosti" />
+      <End Role="KorisnikInfo" EntitySet="KorisnikInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KorisnikI__SpolI__32E0915F" Association="Self.FK__KorisnikI__SpolI__32E0915F">
+      <End Role="Spol" EntitySet="Spol" />
+      <End Role="KorisnikInfo" EntitySet="KorisnikInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KorisnikI__TipDi__31EC6D26" Association="Self.FK__KorisnikI__TipDi__31EC6D26">
+      <End Role="TipDijabetesa" EntitySet="TipDijabetesa" />
+      <End Role="KorisnikInfo" EntitySet="KorisnikInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MjernaJed__Mjern__3D5E1FD2" Association="Self.FK__MjernaJed__Mjern__3D5E1FD2">
+      <End Role="MjernaJedinica" EntitySet="MjernaJedinica" />
+      <End Role="MjernaJedinica_Namirnica_Kcal" EntitySet="MjernaJedinica_Namirnica_Kcal" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MjernaJed__Namir__3C69FB99" Association="Self.FK__MjernaJed__Namir__3C69FB99">
+      <End Role="Namirnica" EntitySet="Namirnica" />
+      <End Role="MjernaJedinica_Namirnica_Kcal" EntitySet="MjernaJedinica_Namirnica_Kcal" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Namirnica__TipNa__398D8EEE" Association="Self.FK__Namirnica__TipNa__398D8EEE">
+      <End Role="TipNamirnice" EntitySet="TipNamirnice" />
+      <End Role="Namirnica" EntitySet="Namirnica" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Obrok__PostotciO__44FF419A" Association="Self.FK__Obrok__PostotciO__44FF419A">
+      <End Role="PostotciObroka" EntitySet="PostotciObroka" />
+      <End Role="Obrok" EntitySet="Obrok" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Obrok__TipObroka__440B1D61" Association="Self.FK__Obrok__TipObroka__440B1D61">
+      <End Role="TipObroka" EntitySet="TipObroka" />
+      <End Role="Obrok" EntitySet="Obrok" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

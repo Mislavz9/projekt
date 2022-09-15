@@ -1,0 +1,515 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="masterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+  </EntityType>
+  <EntityType Name="Jelovnik">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="varchar" MaxLength="50" />
+    <Property Name="VrijediOD" Type="datetime" />
+    <Property Name="VrijediDO" Type="datetime" />
+    <Property Name="BrojObroka" Type="int" />
+  </EntityType>
+  <EntityType Name="Jelovnik_Obrok">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ObrokID" Type="int" />
+    <Property Name="JelovnikID" Type="int" />
+  </EntityType>
+  <EntityType Name="Korisnik">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="8" Nullable="false" />
+  </EntityType>
+  <EntityType Name="KorisnikInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KorisnikID" Type="int" />
+    <Property Name="Ime" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Prezime" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Datum" Type="datetime" Nullable="false" />
+    <Property Name="Tezina" Type="int" Nullable="false" />
+    <Property Name="Visina" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="RazinaFizAktivnostiID" Type="int" />
+    <Property Name="TipDijabetesaID" Type="int" />
+    <Property Name="SpolID" Type="int" />
+  </EntityType>
+  <EntityType Name="MjernaJedinica">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MjernaJedinica_Namirnica_Kcal">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NamirnicaID" Type="int" />
+    <Property Name="MjernaJedinicaID" Type="int" />
+    <Property Name="Kcal" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'master.dbo.MSreplication_options' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="MSreplication_options">
+    <Key>
+      <PropertyRef Name="optname" />
+      <PropertyRef Name="value" />
+      <PropertyRef Name="major_version" />
+      <PropertyRef Name="minor_version" />
+      <PropertyRef Name="revision" />
+      <PropertyRef Name="install_failures" />
+    </Key>
+    <Property Name="optname" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="value" Type="bit" Nullable="false" />
+    <Property Name="major_version" Type="int" Nullable="false" />
+    <Property Name="minor_version" Type="int" Nullable="false" />
+    <Property Name="revision" Type="int" Nullable="false" />
+    <Property Name="install_failures" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Namirnica">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="TipNamirniceID" Type="int" />
+  </EntityType>
+  <EntityType Name="Obrok">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TipObrokaID" Type="int" />
+    <Property Name="PostotciObroka" Type="int" />
+  </EntityType>
+  <EntityType Name="PostotciObroka">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Protein" Type="int" />
+    <Property Name="Ugljikohidrat" Type="int" />
+    <Property Name="Mast" Type="int" />
+    <Property Name="Ukupno" Type="int" />
+  </EntityType>
+  <EntityType Name="RazinaFizAktivnosti">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Razina" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="Spol">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'master.dbo.spt_fallback_db' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="spt_fallback_db">
+    <Key>
+      <PropertyRef Name="xserver_name" />
+      <PropertyRef Name="xdttm_ins" />
+      <PropertyRef Name="xdttm_last_ins_upd" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="dbid" />
+      <PropertyRef Name="status" />
+      <PropertyRef Name="version" />
+    </Key>
+    <Property Name="xserver_name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="xdttm_ins" Type="datetime" Nullable="false" />
+    <Property Name="xdttm_last_ins_upd" Type="datetime" Nullable="false" />
+    <Property Name="xfallback_dbid" Type="smallint" />
+    <Property Name="name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="dbid" Type="smallint" Nullable="false" />
+    <Property Name="status" Type="smallint" Nullable="false" />
+    <Property Name="version" Type="smallint" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'master.dbo.spt_fallback_dev' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="spt_fallback_dev">
+    <Key>
+      <PropertyRef Name="xserver_name" />
+      <PropertyRef Name="xdttm_ins" />
+      <PropertyRef Name="xdttm_last_ins_upd" />
+      <PropertyRef Name="low" />
+      <PropertyRef Name="high" />
+      <PropertyRef Name="status" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="phyname" />
+    </Key>
+    <Property Name="xserver_name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="xdttm_ins" Type="datetime" Nullable="false" />
+    <Property Name="xdttm_last_ins_upd" Type="datetime" Nullable="false" />
+    <Property Name="xfallback_low" Type="int" />
+    <Property Name="xfallback_drive" Type="char" MaxLength="2" />
+    <Property Name="low" Type="int" Nullable="false" />
+    <Property Name="high" Type="int" Nullable="false" />
+    <Property Name="status" Type="smallint" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="phyname" Type="varchar" MaxLength="127" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'master.dbo.spt_fallback_usg' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="spt_fallback_usg">
+    <Key>
+      <PropertyRef Name="xserver_name" />
+      <PropertyRef Name="xdttm_ins" />
+      <PropertyRef Name="xdttm_last_ins_upd" />
+      <PropertyRef Name="dbid" />
+      <PropertyRef Name="segmap" />
+      <PropertyRef Name="lstart" />
+      <PropertyRef Name="sizepg" />
+      <PropertyRef Name="vstart" />
+    </Key>
+    <Property Name="xserver_name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="xdttm_ins" Type="datetime" Nullable="false" />
+    <Property Name="xdttm_last_ins_upd" Type="datetime" Nullable="false" />
+    <Property Name="xfallback_vstart" Type="int" />
+    <Property Name="dbid" Type="smallint" Nullable="false" />
+    <Property Name="segmap" Type="int" Nullable="false" />
+    <Property Name="lstart" Type="int" Nullable="false" />
+    <Property Name="sizepg" Type="int" Nullable="false" />
+    <Property Name="vstart" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="spt_monitor">
+    <Key>
+      <PropertyRef Name="lastrun" />
+      <PropertyRef Name="cpu_busy" />
+      <PropertyRef Name="io_busy" />
+      <PropertyRef Name="idle" />
+      <PropertyRef Name="pack_received" />
+      <PropertyRef Name="pack_sent" />
+      <PropertyRef Name="connections" />
+      <PropertyRef Name="pack_errors" />
+      <PropertyRef Name="total_read" />
+      <PropertyRef Name="total_write" />
+      <PropertyRef Name="total_errors" />
+    </Key>
+    <Property Name="lastrun" Type="datetime" Nullable="false" />
+    <Property Name="cpu_busy" Type="int" Nullable="false" />
+    <Property Name="io_busy" Type="int" Nullable="false" />
+    <Property Name="idle" Type="int" Nullable="false" />
+    <Property Name="pack_received" Type="int" Nullable="false" />
+    <Property Name="pack_sent" Type="int" Nullable="false" />
+    <Property Name="connections" Type="int" Nullable="false" />
+    <Property Name="pack_errors" Type="int" Nullable="false" />
+    <Property Name="total_read" Type="int" Nullable="false" />
+    <Property Name="total_write" Type="int" Nullable="false" />
+    <Property Name="total_errors" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipDijabetesa">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tip" Type="int" />
+  </EntityType>
+  <EntityType Name="TipNamirnice">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipObroka">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <Association Name="FK__Admin__UserID__15702A09">
+    <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="0..1" />
+    <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Korisnik">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Admin">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Jelovnik___Jelov__38B96646">
+    <End Role="Jelovnik" Type="Self.Jelovnik" Multiplicity="0..1" />
+    <End Role="Jelovnik_Obrok" Type="Self.Jelovnik_Obrok" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Jelovnik">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Jelovnik_Obrok">
+        <PropertyRef Name="JelovnikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Jelovnik___Obrok__37C5420D">
+    <End Role="Obrok" Type="Self.Obrok" Multiplicity="0..1" />
+    <End Role="Jelovnik_Obrok" Type="Self.Jelovnik_Obrok" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Obrok">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Jelovnik_Obrok">
+        <PropertyRef Name="ObrokID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KorisnikI__Koris__1E05700A">
+    <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="0..1" />
+    <End Role="KorisnikInfo" Type="Self.KorisnikInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Korisnik">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="KorisnikInfo">
+        <PropertyRef Name="KorisnikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KorisnikI__Razin__1EF99443">
+    <End Role="RazinaFizAktivnosti" Type="Self.RazinaFizAktivnosti" Multiplicity="0..1" />
+    <End Role="KorisnikInfo" Type="Self.KorisnikInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RazinaFizAktivnosti">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="KorisnikInfo">
+        <PropertyRef Name="RazinaFizAktivnostiID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KorisnikI__SpolI__20E1DCB5">
+    <End Role="Spol" Type="Self.Spol" Multiplicity="0..1" />
+    <End Role="KorisnikInfo" Type="Self.KorisnikInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Spol">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="KorisnikInfo">
+        <PropertyRef Name="SpolID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KorisnikI__TipDi__1FEDB87C">
+    <End Role="TipDijabetesa" Type="Self.TipDijabetesa" Multiplicity="0..1" />
+    <End Role="KorisnikInfo" Type="Self.KorisnikInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipDijabetesa">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="KorisnikInfo">
+        <PropertyRef Name="TipDijabetesaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MjernaJed__Mjern__2B5F6B28">
+    <End Role="MjernaJedinica" Type="Self.MjernaJedinica" Multiplicity="0..1" />
+    <End Role="MjernaJedinica_Namirnica_Kcal" Type="Self.MjernaJedinica_Namirnica_Kcal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MjernaJedinica">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MjernaJedinica_Namirnica_Kcal">
+        <PropertyRef Name="MjernaJedinicaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MjernaJed__Namir__2A6B46EF">
+    <End Role="Namirnica" Type="Self.Namirnica" Multiplicity="0..1" />
+    <End Role="MjernaJedinica_Namirnica_Kcal" Type="Self.MjernaJedinica_Namirnica_Kcal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Namirnica">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MjernaJedinica_Namirnica_Kcal">
+        <PropertyRef Name="NamirnicaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Namirnica__TipNa__278EDA44">
+    <End Role="TipNamirnice" Type="Self.TipNamirnice" Multiplicity="0..1" />
+    <End Role="Namirnica" Type="Self.Namirnica" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipNamirnice">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Namirnica">
+        <PropertyRef Name="TipNamirniceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Obrok__PostotciO__33008CF0">
+    <End Role="PostotciObroka" Type="Self.PostotciObroka" Multiplicity="0..1" />
+    <End Role="Obrok" Type="Self.Obrok" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PostotciObroka">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Obrok">
+        <PropertyRef Name="PostotciObroka" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Obrok__TipObroka__320C68B7">
+    <End Role="TipObroka" Type="Self.TipObroka" Multiplicity="0..1" />
+    <End Role="Obrok" Type="Self.Obrok" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipObroka">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Obrok">
+        <PropertyRef Name="TipObrokaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="masterModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Jelovnik" EntityType="Self.Jelovnik" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Jelovnik_Obrok" EntityType="Self.Jelovnik_Obrok" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Korisnik" EntityType="Self.Korisnik" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KorisnikInfo" EntityType="Self.KorisnikInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MjernaJedinica" EntityType="Self.MjernaJedinica" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MjernaJedinica_Namirnica_Kcal" EntityType="Self.MjernaJedinica_Namirnica_Kcal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Namirnica" EntityType="Self.Namirnica" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Obrok" EntityType="Self.Obrok" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PostotciObroka" EntityType="Self.PostotciObroka" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RazinaFizAktivnosti" EntityType="Self.RazinaFizAktivnosti" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Spol" EntityType="Self.Spol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipDijabetesa" EntityType="Self.TipDijabetesa" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipNamirnice" EntityType="Self.TipNamirnice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipObroka" EntityType="Self.TipObroka" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MSreplication_options" EntityType="Self.MSreplication_options" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[MSreplication_options].[optname] AS [optname], 
+[MSreplication_options].[value] AS [value], 
+[MSreplication_options].[major_version] AS [major_version], 
+[MSreplication_options].[minor_version] AS [minor_version], 
+[MSreplication_options].[revision] AS [revision], 
+[MSreplication_options].[install_failures] AS [install_failures]
+FROM [dbo].[MSreplication_options] AS [MSreplication_options]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="spt_fallback_db" EntityType="Self.spt_fallback_db" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[spt_fallback_db].[xserver_name] AS [xserver_name], 
+[spt_fallback_db].[xdttm_ins] AS [xdttm_ins], 
+[spt_fallback_db].[xdttm_last_ins_upd] AS [xdttm_last_ins_upd], 
+[spt_fallback_db].[xfallback_dbid] AS [xfallback_dbid], 
+[spt_fallback_db].[name] AS [name], 
+[spt_fallback_db].[dbid] AS [dbid], 
+[spt_fallback_db].[status] AS [status], 
+[spt_fallback_db].[version] AS [version]
+FROM [dbo].[spt_fallback_db] AS [spt_fallback_db]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="spt_fallback_dev" EntityType="Self.spt_fallback_dev" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[spt_fallback_dev].[xserver_name] AS [xserver_name], 
+[spt_fallback_dev].[xdttm_ins] AS [xdttm_ins], 
+[spt_fallback_dev].[xdttm_last_ins_upd] AS [xdttm_last_ins_upd], 
+[spt_fallback_dev].[xfallback_low] AS [xfallback_low], 
+[spt_fallback_dev].[xfallback_drive] AS [xfallback_drive], 
+[spt_fallback_dev].[low] AS [low], 
+[spt_fallback_dev].[high] AS [high], 
+[spt_fallback_dev].[status] AS [status], 
+[spt_fallback_dev].[name] AS [name], 
+[spt_fallback_dev].[phyname] AS [phyname]
+FROM [dbo].[spt_fallback_dev] AS [spt_fallback_dev]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="spt_fallback_usg" EntityType="Self.spt_fallback_usg" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[spt_fallback_usg].[xserver_name] AS [xserver_name], 
+[spt_fallback_usg].[xdttm_ins] AS [xdttm_ins], 
+[spt_fallback_usg].[xdttm_last_ins_upd] AS [xdttm_last_ins_upd], 
+[spt_fallback_usg].[xfallback_vstart] AS [xfallback_vstart], 
+[spt_fallback_usg].[dbid] AS [dbid], 
+[spt_fallback_usg].[segmap] AS [segmap], 
+[spt_fallback_usg].[lstart] AS [lstart], 
+[spt_fallback_usg].[sizepg] AS [sizepg], 
+[spt_fallback_usg].[vstart] AS [vstart]
+FROM [dbo].[spt_fallback_usg] AS [spt_fallback_usg]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="spt_monitor" EntityType="Self.spt_monitor" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[spt_monitor].[lastrun] AS [lastrun], 
+[spt_monitor].[cpu_busy] AS [cpu_busy], 
+[spt_monitor].[io_busy] AS [io_busy], 
+[spt_monitor].[idle] AS [idle], 
+[spt_monitor].[pack_received] AS [pack_received], 
+[spt_monitor].[pack_sent] AS [pack_sent], 
+[spt_monitor].[connections] AS [connections], 
+[spt_monitor].[pack_errors] AS [pack_errors], 
+[spt_monitor].[total_read] AS [total_read], 
+[spt_monitor].[total_write] AS [total_write], 
+[spt_monitor].[total_errors] AS [total_errors]
+FROM [dbo].[spt_monitor] AS [spt_monitor]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Admin__UserID__15702A09" Association="Self.FK__Admin__UserID__15702A09">
+      <End Role="Korisnik" EntitySet="Korisnik" />
+      <End Role="Admin" EntitySet="Admin" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Jelovnik___Jelov__38B96646" Association="Self.FK__Jelovnik___Jelov__38B96646">
+      <End Role="Jelovnik" EntitySet="Jelovnik" />
+      <End Role="Jelovnik_Obrok" EntitySet="Jelovnik_Obrok" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Jelovnik___Obrok__37C5420D" Association="Self.FK__Jelovnik___Obrok__37C5420D">
+      <End Role="Obrok" EntitySet="Obrok" />
+      <End Role="Jelovnik_Obrok" EntitySet="Jelovnik_Obrok" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KorisnikI__Koris__1E05700A" Association="Self.FK__KorisnikI__Koris__1E05700A">
+      <End Role="Korisnik" EntitySet="Korisnik" />
+      <End Role="KorisnikInfo" EntitySet="KorisnikInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KorisnikI__Razin__1EF99443" Association="Self.FK__KorisnikI__Razin__1EF99443">
+      <End Role="RazinaFizAktivnosti" EntitySet="RazinaFizAktivnosti" />
+      <End Role="KorisnikInfo" EntitySet="KorisnikInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KorisnikI__SpolI__20E1DCB5" Association="Self.FK__KorisnikI__SpolI__20E1DCB5">
+      <End Role="Spol" EntitySet="Spol" />
+      <End Role="KorisnikInfo" EntitySet="KorisnikInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KorisnikI__TipDi__1FEDB87C" Association="Self.FK__KorisnikI__TipDi__1FEDB87C">
+      <End Role="TipDijabetesa" EntitySet="TipDijabetesa" />
+      <End Role="KorisnikInfo" EntitySet="KorisnikInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MjernaJed__Mjern__2B5F6B28" Association="Self.FK__MjernaJed__Mjern__2B5F6B28">
+      <End Role="MjernaJedinica" EntitySet="MjernaJedinica" />
+      <End Role="MjernaJedinica_Namirnica_Kcal" EntitySet="MjernaJedinica_Namirnica_Kcal" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MjernaJed__Namir__2A6B46EF" Association="Self.FK__MjernaJed__Namir__2A6B46EF">
+      <End Role="Namirnica" EntitySet="Namirnica" />
+      <End Role="MjernaJedinica_Namirnica_Kcal" EntitySet="MjernaJedinica_Namirnica_Kcal" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Namirnica__TipNa__278EDA44" Association="Self.FK__Namirnica__TipNa__278EDA44">
+      <End Role="TipNamirnice" EntitySet="TipNamirnice" />
+      <End Role="Namirnica" EntitySet="Namirnica" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Obrok__PostotciO__33008CF0" Association="Self.FK__Obrok__PostotciO__33008CF0">
+      <End Role="PostotciObroka" EntitySet="PostotciObroka" />
+      <End Role="Obrok" EntitySet="Obrok" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Obrok__TipObroka__320C68B7" Association="Self.FK__Obrok__TipObroka__320C68B7">
+      <End Role="TipObroka" EntitySet="TipObroka" />
+      <End Role="Obrok" EntitySet="Obrok" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

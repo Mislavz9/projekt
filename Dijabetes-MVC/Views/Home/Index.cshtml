@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+
+<div class="row" style="text-align:center;">
+    <h1>Dobrodošli!</h1>
+    <h4>Broj 1 aplikacija za generiranje dijabetičke dijete</h4>
+    <img src="~/Resources/images/fit.png" alt="img" class="fitness-img" />
+</div>
+<br/>
+<br />
+<div class="row" style="padding-left:100px;padding-right:100px;">
+    <div class="col-md-5" style="border: 1px solid black;
+        border-radius: 15px;
+        height: 200px;
+        text-align: center;">
+        <h2>Korisničke postavke</h2>
+        <p>
+            Kliknite dalje kako bi ste ažurirali svoje osobne podatke.
+        </p>
+        <br />
+        <br />
+        <p><a class="btn btn-warning" href="~/Korisnik/Index">Dalje</a></p>
+    </div>
+    <div class="col-md-5 col-md-offset-2" style="border: 1px solid black;
+        border-radius: 15px;
+        height: 200px;
+        text-align: center;" >
+        <h2>Jelovnici</h2>
+        <p>Kliknite dalje kako bi ažurirali svoj personalizirani jelovnik.</p>
+        <br />
+        <br />
+        <p><a class="btn btn-warning" href="~/Jelovnik/Index">Dalje</a></p>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Odjava", "Login", "Login")
+</div>

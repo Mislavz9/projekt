@@ -1,0 +1,32 @@
+﻿@model List<SelectListItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row" style="text-align:center;">
+        <h1>SITAMET FITNESS</h1>
+        <img src="~/Resources/images/fit.png" alt="img" class="fitness-img" />
+        <p>Izaberite jedan od ponuđenih brojeva obroka u danu</p>
+        <hr style="width:50%" />
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-12" style="text-align:center; padding-left:50px;">
+                @Html.DropDownList("BrojObroka", Model, htmlAttributes: new { @class = "form-control" })
+                <br />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="submit" value="Odaberi" class="btn btn-warning" />
+            </div>
+        </div>
+    </div>
+
+    <div>
+        @Html.ActionLink("Povratak", "Index", "Home")
+    </div>
+}
